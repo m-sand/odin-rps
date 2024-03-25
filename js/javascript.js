@@ -28,6 +28,33 @@ function playRound (playerSelection, computerSelection) {
     return result;
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+//plays a best of 5 game
+function playGame() {
+    let playerWinCount = 0;
+    let computerWinCount = 0;
+    let gameResult;
+
+    //Plays 5 games
+    for (let i = 0; i<5; i++){
+        let playerChoice = prompt("Please enter a choice: Rock, Paper, or Scissors");
+        let roundOutcome = playRound(playerChoice, getComputerChoice());
+
+        if (roundOutcome.includes("Win")) {
+            playerWinCount++;
+        } else if (roundOutcome.includes("Lose")){
+            computerWinCount++;
+        }
+        console.log(roundOutcome);
+    }
+
+    //Compares score and determines winner
+    if(playerWinCount > computerWinCount){
+        gameResult = "Congrats! You won: " + playerWinCount + " - " + computerWinCount;
+    } else if (playerWinCount < computerWinCount) {
+        gameResult = "Bummer... You've lost: " + playerWinCount + " - " + computerWinCount;
+    } else {
+        gameResult = "It's a tie: " + playerWinCount + " - " + computerWinCount;
+    }
+
+    return gameResult;
+}
